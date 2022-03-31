@@ -1,0 +1,16 @@
+#!/bin/bash
+#自动挂梯子
+var=$(ps -fe | grep clash | grep -v grep)
+if [[ $? -ne 0 ]]; then
+    echo "Starting..."
+    clash >/dev/null 2>&1 &
+    kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key "ProxyType" 1
+    export http_proxy="127.0.0.1:7890"
+    export https_proxy="127.0.0.1:7890"
+else
+    echo "Closing..."
+    killall -9 clash
+    kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key "ProxyType" 0
+    export -n http_proxy
+    export -n https_proxy
+fi

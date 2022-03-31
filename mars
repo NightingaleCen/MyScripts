@@ -1,0 +1,2 @@
+#!/bin/bash
+nohup java -jar ~/工具/Mars4_5.jar >/dev/null 2>&1 &

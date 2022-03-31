@@ -1,0 +1,2 @@
+#!/bin/bash
+nohup google-chrome-stable --app="https://www.onenote.com/notebooks?auth=1&nf=1&fromAR=1" >/dev/null 2>&1 &

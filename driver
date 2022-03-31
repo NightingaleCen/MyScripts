@@ -1,0 +1,17 @@
+#!/bin/bash
+#自动挂载Google Driver
+var=$(ps -fe | grep rclone | grep -v grep)
+if [[ $var ]]; then
+    echo "Unmounting..."
+    killall -9 rclone
+    fusermount -qzu ~/google-drive
+
+else
+    judge=$(ps -fe | grep clash | grep -v grep)
+    if [[ $judge ]] ; then
+        echo "Mounting..."
+        rclone mount googledrive: ~/google-drive  --umask 0000  --default-permissions  --allow-non-empty  --allow-other  --transfers 4  --buffer-size 32M  --low-level-retries 200 >/dev/null 2>&1 &
+    else
+        echo "Clash is not running!"
+    fi
+fi
